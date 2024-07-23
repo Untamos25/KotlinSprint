@@ -3,11 +3,9 @@ package lesson_2
 fun main() {
 
     val numberOfStudents = 4
-    val englishScores = arrayOf(3, 4, 3, 5)
-    var englishScoresSum = 0f
-    val averageScore = englishScoresSum / numberOfStudents
+    val englishScores = arrayOf(3, 4, 3, 5).sum().toFloat()
 
-    for (element in englishScores) englishScoresSum += element
+    val averageScore = englishScores / numberOfStudents
 
     println(String.format("%.2f", averageScore))
 
