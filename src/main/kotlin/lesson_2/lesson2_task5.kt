@@ -2,7 +2,7 @@ package lesson_2
 
 import kotlin.math.pow
 
-const val MAX_PERCENT = 100
+private const val MAX_PERCENT = 100
 
 fun main() {
     val initialAmount = 70000
