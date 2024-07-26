@@ -1,6 +1,6 @@
 package lesson_2
 
-    const val MAX_PERCENT = 100
+private const val MAX_PERCENT = 100
 
 fun main() {
     val crystalOre = 7
