@@ -1,5 +1,8 @@
 package lesson_5
 
+private const val NUMBER_MIN = 0
+private const val NUMBER_MAX = 42
+
 fun main() {
     val numberWin1 = 7
     val numberWin2 = 13
@@ -15,7 +18,7 @@ fun main() {
 
     print("Введите первое число: ")
     var numberUser1 = readln().toInt()
-    while (numberUser1 < 0 || numberUser1 > 42) {
+    while (numberUser1 < NUMBER_MIN || numberUser1 > NUMBER_MAX) {
         print(
             "Недопустимое число!\nЧисло должно быть в интервале от 0 до 42. " +
                     "Попробуйте ещё раз.\nВведите первое число: "
@@ -25,9 +28,9 @@ fun main() {
 
     print("Введите второе число: ")
     var numberUser2 = readln().toInt()
-    while (numberUser2 < 0 || numberUser2 > 42 || numberUser2 == numberUser1) {
+    while (numberUser2 < NUMBER_MIN || numberUser2 > NUMBER_MAX) {
         print(
-            "Недопустимое число!\nЧисло должно быть в интервале от 0 до 42 и НЕ должно быть равно первому. " +
+            "Недопустимое число!\nЧисло должно быть в интервале от 0 до 42. " +
                     "Попробуйте ещё раз.\nВведите второе число: "
         )
         numberUser2 = readln().toInt()
