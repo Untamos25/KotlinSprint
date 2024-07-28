@@ -1,43 +1,63 @@
 package lesson_5
 
 import kotlin.random.Random
+import kotlin.system.exitProcess
+
+private const val AMOUNT_OF_WIN_NUMBERS = 3    // Количество выигрышных чисел
+private const val AMOUNT_OF_USER_NUMBERS = 3    // Количество чисел, которое может ввести игрок
+private const val NUMBER_MIN = 0
+private const val NUMBER_MAX = 42
 
 fun main() {
 
-    val listWin = listOf(Random.nextInt(0, 42), Random.nextInt(0, 42), Random.nextInt(0, 42))
-    val listUser = mutableListOf<Int?>(null, null, null)
+    // Проверка условия для возможности реализации всех выигрышных комбинаций
 
-    println("Введите последовательно 3 числа от 0 до 42 включительно.")
-
-    print("Введите первое число: ")
-    listUser[0] = readln().toInt()
-    while (listUser[0]!! < 0 || listUser[0]!! > 42) {
-        print("Недопустимое число!\nЧисло должно быть в интервале от 0 до 42. Попробуйте ещё раз.\nВведите первое число: ")
-        listUser[0] = readln().toInt()
+    if (AMOUNT_OF_USER_NUMBERS < AMOUNT_OF_WIN_NUMBERS) {
+        print("Условие викторины задано некорректно:\n" +
+                "количество вводимых игроком чисел не может быть меньше количества загаданных.")
+        exitProcess(0)
     }
 
-    print("Введите второе число: ")
-    listUser[1] = readln().toInt()
-    while (listUser[1]!! < 0 || listUser[1]!! > 42) {
-        print("Недопустимое число!\nЧисло должно быть в интервале от 0 до 42. Попробуйте ещё раз.\nВведите второе число: ")
-        listUser[1] = readln().toInt()
+    val listWin = (0..<AMOUNT_OF_WIN_NUMBERS).map { Random.nextInt(NUMBER_MIN, NUMBER_MAX + 1) }
+    val listUser = MutableList<Int?>(AMOUNT_OF_USER_NUMBERS) { null }
+
+    println("Викторина! Угадайте загаданные числа и получите приз!\nЗагадано чисел: $AMOUNT_OF_WIN_NUMBERS \n")
+
+    // Зависимость приветственного сообщения от количества чисел, которое может ввести игрок
+
+    val lastNumber = if (listUser.size !in 10..20) listUser.size.toString().last().digitToInt() else listUser.size
+    when (lastNumber) {
+        1 -> println("Введите ${listUser.size} число от 0 до 42 включительно.")
+        in 2..4 -> println("Введите последовательно ${listUser.size} числа от 0 до 42 включительно.")
+        else -> println("Введите последовательно ${listUser.size} чисел от 0 до 42 включительно.")
     }
 
-    print("Введите третье число: ")
-    listUser[2] = readln().toInt()
-    while (listUser[2]!! < 0 || listUser[2]!! > 42) {
-        print("Недопустимое число!\nЧисло должно быть в интервале от 0 до 42. Попробуйте ещё раз.\nВведите третье число: ")
-        listUser[2] = readln().toInt()
+    // Проверка введённого значения игроком и запись этого значения в список
+
+    for (i in listUser.indices) {
+        print("Введите ${i + 1}-е число: ")
+        var input: String? = readln()
+        while (input == null || !input.matches(Regex("\\d+")) || input.toInt() < NUMBER_MIN || input.toInt() > NUMBER_MAX) {
+            print(
+                "Недопустимое число!\nЧисло должно быть целым в интервале от 0 до 42." +
+                        "Попробуйте ещё раз.\nВведите ${i + 1}-е число: "
+            )
+            input = readln()
+        }
+        listUser[i] = input.toInt()
     }
+
+    // Сравнение списков и вывод результата
 
     println("--------------------")
     val intersection = listUser.intersect(listWin)
     when (intersection.size) {
-        3 -> println("Поздравляем! Вы угадали все числа и выиграли джекпот!")
         2 -> println("Вы угадали 2 числа и выиграли крупный приз!")
         1 -> println("Вы угадали 1 число и выиграли утешительный приз!")
-        else -> println("Вы не угадали ни одного числа. Попробуйте ещё раз!")
+        0 -> println("Вы не угадали ни одного числа. Попробуйте ещё раз!")
+        else -> println("Поздравляем! Вы угадали все числа и выиграли джекпот!")
     }
+    println("Ваши числа: ${listUser.joinToString(", ")}.")
     println("Загаданные числа: ${listWin.joinToString(", ")}.")
 
 }
