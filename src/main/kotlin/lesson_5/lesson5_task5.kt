@@ -27,9 +27,9 @@ fun main() {
 
     val lastNumber = if (listUser.size !in 10..20) listUser.size.toString().last().digitToInt() else listUser.size
     when (lastNumber) {
-        1 -> println("Введите ${listUser.size} число от 0 до 42 включительно.")
-        in 2..4 -> println("Введите последовательно ${listUser.size} числа от 0 до 42 включительно.")
-        else -> println("Введите последовательно ${listUser.size} чисел от 0 до 42 включительно.")
+        1 -> println("Введите ${listUser.size} число от $NUMBER_MIN до $NUMBER_MAX включительно.")
+        in 2..4 -> println("Введите последовательно ${listUser.size} числа от $NUMBER_MIN до $NUMBER_MAX включительно.")
+        else -> println("Введите последовательно ${listUser.size} чисел от $NUMBER_MIN до $NUMBER_MAX включительно.")
     }
 
     // Проверка введённого значения игроком и запись этого значения в список
@@ -39,7 +39,7 @@ fun main() {
         var input: String? = readln()
         while (input == null || !input.matches(Regex("\\d+")) || input.toInt() < NUMBER_MIN || input.toInt() > NUMBER_MAX) {
             print(
-                "Недопустимое число!\nЧисло должно быть целым в интервале от 0 до 42." +
+                "Недопустимое число!\nЧисло должно быть целым в интервале от $NUMBER_MIN до $NUMBER_MAX." +
                         "Попробуйте ещё раз.\nВведите ${i + 1}-е число: "
             )
             input = readln()
