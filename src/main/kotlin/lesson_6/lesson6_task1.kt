@@ -1,32 +1,31 @@
 package lesson_6
 
 fun main() {
-    var userLoginReg = ""
-    var userPassReg = ""
-    var userLoginAuth = ""
-    var userPassAuth = ""
+
+    var userLoginReg: String
+    var userPassReg: String
 
     println("Регистрация нового аккаунта.")
 
-    while (userLoginReg == "" || userPassReg == "") {
+    do {
         print("Введите логин: ")
         userLoginReg = readln()
         print("Введите пароль: ")
         userPassReg = readln()
         if (userLoginReg == "" || userPassReg == "")
             println("Поля логин и пароль не могут быть пустыми!")
-    }
+    } while (userLoginReg == "" || userPassReg == "")
 
     println("Регистрация завершена.\nВведите логин и пароль для авторизации.")
 
-    while (userLoginReg != userLoginAuth || userPassReg != userPassAuth) {
+    do {
         print("Введите логин: ")
-        userLoginAuth = readln()
+        val userLoginAuth = readln()
         print("Введите пароль: ")
-        userPassAuth = readln()
+        val userPassAuth = readln()
         if (userLoginReg != userLoginAuth || userPassReg != userPassAuth)
             println("Введён неверный логин или пароль. Повторите попытку.")
-    }
+    } while (userLoginReg != userLoginAuth || userPassReg != userPassAuth)
 
     println("Авторизация прошла успешно.")
 
