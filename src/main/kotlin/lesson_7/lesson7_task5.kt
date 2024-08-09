@@ -5,7 +5,7 @@ private const val MIN_LENGTH = 6
 fun main() {
 
     val passLength: Int
-    var pass: String
+    var pass = ""
     val charsUp = ('A'..'Z')
     val charsLow = ('a'..'z')
     val numbers = (0..9)
@@ -19,26 +19,9 @@ fun main() {
     }
     passLength = input.toInt()
 
-    do {
-        pass = ""
-        for (i in 1..passLength) pass += allSymbols.random()
-    } while (!pass.any(Char::isLowerCase) || !pass.any(Char::isUpperCase) || !pass.any(Char::isDigit))
+    pass += charsUp.random().toString() + numbers.random().toString() + charsLow.random().toString()
+    for (i in 4..passLength) pass += allSymbols.random()
 
     println("Ваш новый пароль: $pass")
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
