@@ -2,8 +2,7 @@ package lesson_9
 
 fun main() {
 
-    val omelette = listOf(2, 50, 15)    // Количество на 1 порцию омлета: яйца, молоко, масло
-    val fewPortions = mutableListOf<Int>()
+    val map = mutableMapOf("Яйца (шт.)" to 2, "Молоко (мл)" to 50, "Сливочное масло (г)" to 15)
 
     print("Какое количество порций вы хотите приготовить? ")
     var input: String? = readln()
@@ -13,15 +12,9 @@ fun main() {
     }
     val answer = input.toInt()
 
-    omelette.forEach { fewPortions.add(it * answer) }
+    map.forEach { map[it.key] = it.value * answer }
 
-    println(
-        """
-        
-        На $answer порции вам потребуется
-        Яиц - ${fewPortions[0]}
-        Молока - ${fewPortions[1]}
-        Сливочного масла - ${fewPortions[2]}""".trimIndent()
-    )
+    println("\nНа $answer порции вам понадобится:")
+    map.forEach { println(" - ${it.key} - ${it.value}") }
 
 }
