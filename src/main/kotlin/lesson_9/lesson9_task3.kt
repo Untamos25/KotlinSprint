@@ -2,7 +2,7 @@ package lesson_9
 
 fun main() {
 
-    val map = mutableMapOf("Яйца (шт.)" to 2, "Молоко (мл)" to 50, "Сливочное масло (г)" to 15)
+    val basicIngredientList = listOf(2, 50, 15)
 
     print("Какое количество порций вы хотите приготовить? ")
     var input: String? = readln()
@@ -10,11 +10,13 @@ fun main() {
         print("Недопустимое значение, попробуйте ещё раз.\nВведите целое число: ")
         input = readln()
     }
-    val answer = input.toInt()
+    val numberOfPortions = input.toInt()
 
-    map.forEach { map[it.key] = it.value * answer }
+    val finalIngredientList = basicIngredientList.map { it * numberOfPortions }
 
-    println("\nНа $answer порции вам понадобится:")
-    map.forEach { println(" - ${it.key} - ${it.value}") }
-
+    println("""
+        На $numberOfPortions порций вам понадобится:
+         - яиц - ${finalIngredientList[0]} шт.
+         - молока - ${finalIngredientList[1]} мл
+         - сливочного масла - ${finalIngredientList[2]} г""".trimIndent())
 }
