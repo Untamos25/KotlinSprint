@@ -3,32 +3,40 @@ package lesson_10
 private const val POSITIVE_ANSWER = "ДА"
 
 fun main() {
-    var counter = 0
+    var roundCounter = 0
+    var userWinsCounter = 0
+
     do {
-        print("\nРаунд ${++counter}.")
-        playGame()
+        println("\nРаунд ${++roundCounter}.")
+        var turn = "Ход игрока."
+        val diceUser = rollTheDice(turn)
+        turn = "\nХод оппонента."
+        val diceComp = rollTheDice(turn)
+
+        when {
+            diceUser > diceComp -> {
+                println("\nВы выиграли!")
+                userWinsCounter++
+            }
+            diceUser < diceComp -> println("\nВы проиграли.")
+            else -> println("\nНичья!")
+        }
         print("Хотите бросить кости ещё раз? (Да / Нет) ")
     } while (readln().uppercase() == POSITIVE_ANSWER)
-    println("\nИгра окончена.\nСыграно раундов: $counter")
+
+    println("\nИгра окончена.\nВыиграно раундов: $userWinsCounter из $roundCounter")
 }
 
-private fun rollTheDice() = (1..6).random()
+private fun generateDiceValue() = (1..6).random()
 
-private fun playGame() {
-    print("\nХод игрока.\nНажмите Enter, чтобы бросить кости")
-    readln()
-    val diceUser = rollTheDice()
-    println("Очки игрока: $diceUser")
-    Thread.sleep(1500)
-
-    println("\nХод оппонента.")
-    val diceComp = rollTheDice()
-    println("Очки оппонента: $diceComp")
-    Thread.sleep(1500)
-
-    when {
-        diceUser > diceComp -> println("\nВы выиграли!")
-        diceUser < diceComp -> println("\nВы проиграли.")
-        else -> println("\nНичья!")
+private fun rollTheDice(turn: String): Int {
+    println(turn)
+    if (turn == "Ход игрока.") {
+        print("Нажмите Enter, чтобы бросить кости")
+        readln()
     }
+    val dice = generateDiceValue()
+    println("Очков на костях: $dice")
+    Thread.sleep(1500)
+    return dice
 }
