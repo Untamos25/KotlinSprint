@@ -1,10 +1,8 @@
 package lesson_10
 
 fun main() {
-    var turn = "Ход игрока."
-    val diceUser = rollTheDice(turn)
-    turn = "\nХод оппонента."
-    val diceComp = rollTheDice(turn)
+    val diceUser = rollTheDice("Ход игрока.")
+    val diceComp = rollTheDice("Ход оппонента.")
 
     when {
         diceUser > diceComp -> println("\nВы выиграли!")
