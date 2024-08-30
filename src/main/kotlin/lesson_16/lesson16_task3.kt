@@ -1,10 +1,7 @@
 package lesson_16
 
-class User (val login: String, private val password: String, ) {
-
-    fun passwordValidation(inputPassword: String): Boolean {
-        return inputPassword == password
-    }
+class User(private val login: String, private val password: String) {
+    fun validatePassword(inputPassword: String): Boolean = inputPassword == password
 }
 
 fun main() {
@@ -13,6 +10,6 @@ fun main() {
     print("Введите пароль: ")
     val inputPassword = readln()
 
-    if (user1.passwordValidation(inputPassword)) println("Пароль верный")
+    if (user1.validatePassword(inputPassword)) println("Пароль верный")
     else println("Пароль не верный")
 }
