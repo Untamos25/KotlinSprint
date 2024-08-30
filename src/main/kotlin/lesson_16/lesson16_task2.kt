@@ -1,9 +1,11 @@
 package lesson_16
 
+import kotlin.math.pow
+
 private const val PI = 3.14
 
 class Circle(private val radius: Double) {
-    fun calculateArea() = PI * radius * radius
+    fun calculateArea() = PI * radius.pow(2)
     fun calculateCircleLength() = 2 * PI * radius
 }
 
