@@ -1,6 +1,6 @@
 package lesson_17
 
-class Folder(name: String, numberOfFiles: Int, var isSecret: Boolean, ) {
+class Folder(name: String, numberOfFiles: Int, private var isSecret: Boolean, ) {
     var name = name
         get() = if (isSecret) "Скрытая папка" else field
 
