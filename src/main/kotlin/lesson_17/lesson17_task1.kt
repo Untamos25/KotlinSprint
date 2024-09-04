@@ -7,6 +7,6 @@ class QuizItem(_question: String, _answer: String, ){
     var answer = _answer
         get() = field
         set(value) {
-            field = answer
+            field = value
         }
 }
