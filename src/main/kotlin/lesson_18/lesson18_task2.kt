@@ -1,39 +1,34 @@
 package lesson_18
 
-open class Dice {
-    open fun getDicePoints() = ""
+abstract class Dice(val faces: Int) {
+    abstract fun rollTheDice(): String
 }
 
-class D4(private val maxDicePoints: Int = 4) : Dice() {
-    override fun getDicePoints(): String {
-        return "Результат броска: ${(1..maxDicePoints).random()}"
+class DiceWith4Faces(faces: Int = 4) : Dice(faces) {
+    override fun rollTheDice(): String {
+        return "Результат броска кости d4: ${(1..faces).random()}"
     }
 }
 
-class D6(private val maxDicePoints: Int = 6) : Dice() {
-    override fun getDicePoints(): String {
-        return "Результат броска: ${(1..maxDicePoints).random()}"
+class DiceWith6Faces(faces: Int = 6) : Dice(faces) {
+    override fun rollTheDice(): String {
+        return "Результат броска кости d6: ${(1..faces).random()}"
     }
 }
 
-class D8(private val maxDicePoints: Int = 8) : Dice() {
-    override fun getDicePoints(): String {
-        return "Результат броска: ${(1..maxDicePoints).random()}"
-    }
-}
-
-fun rollAllDices(dices: List<Dice>){
-    dices.forEach{
-        println(it.getDicePoints())
+class DiceWith8Faces(faces: Int = 8) : Dice(faces) {
+    override fun rollTheDice(): String {
+        return "Результат броска кости d8: ${(1..faces).random()}"
     }
 }
 
 fun main() {
-    val d4 = D4()
-    val d6 = D6()
-    val d8 = D8()
+    val d4 = DiceWith4Faces()
+    val d6 = DiceWith6Faces()
+    val d8 = DiceWith8Faces()
 
     val listOfDices = listOf<Dice>(d4, d6, d8)
-
-    rollAllDices(listOfDices)
+    listOfDices.forEach{
+        println(it.rollTheDice())
+    }
 }
