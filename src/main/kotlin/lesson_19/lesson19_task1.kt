@@ -9,5 +9,5 @@ enum class FishType (val fishName: String, ) {
 
 fun main() {
     println("Доступные виды рыб:")
-    FishType.values().forEach { println(it.fishName) }
+    FishType.entries.forEach { println(it.fishName) }
 }
