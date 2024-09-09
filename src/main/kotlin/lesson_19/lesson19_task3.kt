@@ -11,6 +11,6 @@ class Spaceship {
     }
 
     fun shootBackAtAsteroid() {
-        throw NotImplementedError("Эта функция ещё не реализована")
+        //TODO("Эта функция ещё не реализована")
     }
 }
