@@ -7,14 +7,10 @@ enum class Sex(val sexLetter: String) {
     FEMALE("Ж")
 }
 
-class Person(private var name: String, private var sex: Sex) {
+class Person(private val name: String, private val sex: Sex) {
 
-    fun getName(): String {
-        return name
-    }
-
-    fun getSex(): Sex {
-        return sex
+    fun printInfoAboutPerson() {
+        println("Имя: $name | Пол: ${if (sex == Sex.MALE) "Муж." else "Жен."}")
     }
 }
 
@@ -23,18 +19,19 @@ fun getNameWithInputCheck(): String {
     var input: String? = readlnOrNull()?.trim()
     while (input == null || input == "") {
         print("Вы ничего не ввели. Повторите ввод имени: ")
-        input = readln().trim()
+        input = readlnOrNull()?.trim()
     }
     return input
 }
 
 fun getSexWithInputCheck(): Sex {
     var input: String? = readlnOrNull()?.trim()?.uppercase()
-    while (input == null || input != "М" && input != "Ж") {
-        print("Недопустимое значение.\nВведите данные на русской раскладке согласно инструкции (М / Ж): ")
+    while (input == null || input != Sex.MALE.sexLetter && input != Sex.FEMALE.sexLetter) {
+        print("Недопустимое значение.\nВведите данные на русской раскладке согласно инструкции " +
+                "(${Sex.MALE.sexLetter} / ${Sex.FEMALE.sexLetter}): ")
         input = readlnOrNull()?.trim()?.uppercase()
     }
-    return if (input == "М") Sex.MALE else Sex.FEMALE
+    return if (input == Sex.MALE.sexLetter) Sex.MALE else Sex.FEMALE
 }
 
 
@@ -43,7 +40,8 @@ fun main() {
         """
         Введите имя и пол регистрируемого. Всего человек: $NUMBER_OF_PERSONS.
         Поле "Имя" не может быть пустым.
-        Поле "Пол" может принимать только значения "М" (мужской) или "Ж" (женский) без кавычек.
+        Поле "Пол" может принимать только значения:
+        "${Sex.MALE.sexLetter}" (мужской) или "${Sex.FEMALE.sexLetter}" (женский) без кавычек.
         
     """.trimIndent()
     )
@@ -55,7 +53,7 @@ fun main() {
         print("Введите имя: ")
         val name = getNameWithInputCheck()
 
-        print("Введите пол (М / Ж): ")
+        print("Введите пол (${Sex.MALE.sexLetter} / ${Sex.FEMALE.sexLetter}): ")
         val sex = getSexWithInputCheck()
 
         person = Person(name, sex)
@@ -63,8 +61,5 @@ fun main() {
     }
 
     println("--------------------\nВведены данные о следующих людях:")
-
-    listOfPersons.forEach {
-        println("Имя: ${it.getName()} | Пол: ${if (it.getSex().sexLetter == "М") "Муж." else "Жен."}")
-    }
+    listOfPersons.forEach { it.printInfoAboutPerson() }
 }
