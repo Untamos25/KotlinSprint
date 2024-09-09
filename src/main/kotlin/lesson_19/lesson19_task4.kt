@@ -6,8 +6,7 @@ enum class AmmoType(val damage: Int) {
     RED(20),
 }
 
-class Tank {
-    private var currentAmmo: AmmoType? = null
+class Tank (private var currentAmmo: AmmoType? = null) {
 
     fun loadTheGun(ammoType: AmmoType) {
         currentAmmo = ammoType
