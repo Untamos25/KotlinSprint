@@ -13,7 +13,7 @@ class Tank (private var currentAmmo: AmmoType? = null) {
     }
 
     fun shoot() {
-        if (currentAmmo != null) println("Нанесено урона: ${currentAmmo!!.damage}")
+        if (currentAmmo != null) println("Нанесено урона: ${currentAmmo?.damage}")
         else println("Пушка танка не заряжена.")
     }
 }
