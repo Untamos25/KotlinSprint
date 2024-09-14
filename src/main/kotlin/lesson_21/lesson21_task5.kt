@@ -1,19 +1,15 @@
 package lesson_21
 
 interface Map {
-    val Categories: kotlin.collections.Map<String, Int>
+    val categories: kotlin.collections.Map<String, Int>
 }
 
-class Character(override val Categories: kotlin.collections.Map<String, Int>) : Map
+class Character(override val categories: kotlin.collections.Map<String, Int>) : Map
 
-fun Map.maxCategory(): String {
-    val maxValue = this.Categories.entries.maxBy { it.value }
-    val allCategoriesWithMaxValues = this.Categories.filter { it.value == maxValue.value }
-    return if (allCategoriesWithMaxValues.size > 1) {
-        allCategoriesWithMaxValues.toList().shuffled()[0].first
-    } else {
-        maxValue.key
-    }
+fun Map.maxCategory(): String? {
+    val mostExperiencedCategories =
+        this.categories.filter { currentCategory -> currentCategory.value == categories.maxByOrNull { it.value }?.value }
+    return mostExperiencedCategories.toList().randomOrNull()?.first
 }
 
 fun main() {
