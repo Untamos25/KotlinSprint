@@ -6,11 +6,8 @@ interface Map {
 
 class Character(override val categories: kotlin.collections.Map<String, Int>) : Map
 
-fun Map.maxCategory(): String? {
-    val mostExperiencedCategories =
-        this.categories.filter { currentCategory -> currentCategory.value == categories.maxByOrNull { it.value }?.value }
-    return mostExperiencedCategories.toList().randomOrNull()?.first
-}
+fun Map.maxCategory(): String? = this.categories.maxByOrNull { it.value }?.key
+
 
 fun main() {
     val character = Character(mapOf("Сила" to 10, "Ловкость" to 15, "Интеллект" to 15, "Выносливость" to 15))
