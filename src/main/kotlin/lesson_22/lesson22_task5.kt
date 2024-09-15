@@ -21,8 +21,10 @@ fun main() {
         distanceFromEarth = 4.36
     )
 
-    println("Название: ${alphaCentauri.name}")
-    println("Описание: ${alphaCentauri.description}")
-    println("Земная дата и время события: ${alphaCentauri.dateTime.format(formatter)}")
-    println("Расстояние от Земли: ${alphaCentauri.distanceFromEarth} световых лет")
+    val (name, description, dateTime, distanceFromEarth) = alphaCentauri
+
+    println("Название: $name")
+    println("Описание: $description")
+    println("Земная дата и время события: ${dateTime.format(formatter)}")
+    println("Расстояние от Земли: $distanceFromEarth световых лет")
 }
